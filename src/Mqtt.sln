@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mqtt.ConsolePublisher", "Mq
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mqtt.ConsoleConsumer", "Mqtt.ConsoleConsumer\Mqtt.ConsoleConsumer.csproj", "{F2A8C3A2-E4AD-4482-8EC4-665B545FCDBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mqtt.Fleck", "Mqtt.Fleck\Mqtt.Fleck.csproj", "{964B85CE-E6F2-488F-9EC8-A35D017DCDF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F2A8C3A2-E4AD-4482-8EC4-665B545FCDBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2A8C3A2-E4AD-4482-8EC4-665B545FCDBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2A8C3A2-E4AD-4482-8EC4-665B545FCDBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{964B85CE-E6F2-488F-9EC8-A35D017DCDF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{964B85CE-E6F2-488F-9EC8-A35D017DCDF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{964B85CE-E6F2-488F-9EC8-A35D017DCDF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{964B85CE-E6F2-488F-9EC8-A35D017DCDF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

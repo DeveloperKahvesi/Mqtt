@@ -29,7 +29,7 @@ namespace Mqtt.ConsoleConsumer
             await _mqttClient.StartAsync(options);
             _mqttClient.UseApplicationMessageReceivedHandler(e =>
             {
-                Console.WriteLine($"RECEIVED : {Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
+                Console.WriteLine($"{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
             });
 
             Console.WriteLine("-- MQTT Consumer started ---");

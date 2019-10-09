@@ -1,0 +1,71 @@
+{
+	// Use IntelliSense to find out which attributes exist for C# debugging
+	// Use hover for the description of the existing attributes
+	// For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Web",
+			"type": "coreclr",
+			"request": "launch",
+			"preLaunchTask": "build",
+			// If you have changed target frameworks, make sure to update the program path.
+			"program": "${workspaceFolder}/Mqtt.Web/bin/Debug/netcoreapp3.0/Mqtt.Web.dll",
+			"args": [],
+			"cwd": "${workspaceFolder}/Mqtt.Web",
+			"stopAtEntry": false,
+			// Enable launching a web browser when ASP.NET Core starts. For more information: https://aka.ms/VSCode-CS-LaunchJson-WebBrowser
+			"serverReadyAction": {
+				"action": "openExternally",
+				"pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
+			},
+			"env": {
+				"ASPNETCORE_ENVIRONMENT": "Development"
+			},
+			"sourceFileMap": {
+				"/Views": "${workspaceFolder}/Views"
+			}
+		},
+		{
+			"name": ".NET Core Attach",
+			"type": "coreclr",
+			"request": "attach",
+			"processId": "${command:pickProcess}"
+		},
+		{
+			"name": "Producer",
+			"preLaunchTask": "build",
+			"type": "coreclr",
+			"request": "launch",
+			"console": "externalTerminal",
+			"program": "${workspaceFolder}/Mqtt.ConsolePublisher/bin/Debug/netcoreapp3.0/Mqtt.ConsolePublisher.dll"
+		},
+		{
+			"name": "Consumer",
+			"preLaunchTask": "build",
+			"type": "coreclr",
+			"request": "launch",
+			"console": "externalTerminal",
+			"program": "${workspaceFolder}/Mqtt.ConsoleConsumer/bin/Debug/netcoreapp3.0/Mqtt.ConsoleConsumer.dll"
+		},
+		{
+			"name": "Fleck",
+			"preLaunchTask": "build",
+			"type": "coreclr",
+			"request": "launch",
+			"console": "externalTerminal",
+			"program": "${workspaceFolder}/Mqtt.Fleck/bin/Debug/netcoreapp3.0/Mqtt.Fleck.dll"
+		}
+	],
+	"compounds": [
+		{
+			"name": "Launch All",
+			"configurations": [
+				"Producer",
+				"Web",
+				"Consumer",
+				"Fleck"
+			]
+		}
+	]
+}

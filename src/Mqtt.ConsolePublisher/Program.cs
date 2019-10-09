@@ -52,7 +52,7 @@ namespace Mqtt.ConsolePublisher
         }
 
 
-        static async Task PublishAsync(CancellationToken token, int sleepMiliseconds = 1000)
+        static Task PublishAsync(CancellationToken token, int sleepMiliseconds = 1000)
         {
             Task task = null;
             task = Task.Run(() =>
@@ -71,19 +71,22 @@ namespace Mqtt.ConsolePublisher
                         continue;
                     }
 
-                    var payload = $"{DateTime.Now} : {rnd.Next(0, 50)}";
+                    var payload1 = $"{DateTime.Now} : {rnd.Next(0, 50)}";
+                    var payload2 = $"{rnd.Next(0, 50)}";
+
                     var message = new MqttApplicationMessageBuilder()
                          .WithTopic("ali/test")
-                         .WithPayload(payload)
+                         .WithPayload(payload1)
                          .WithExactlyOnceQoS()
                          .WithRetainFlag()
                          .Build();
 
                     _mqttClient.PublishAsync(message);
-                    Console.WriteLine($"PUBLISHED : {payload}");
+                    Console.WriteLine($"PUBLISHED: {payload1}");
                     Thread.Sleep(sleepMiliseconds);
                 }
             });
+            return task;
         }
     }
 }

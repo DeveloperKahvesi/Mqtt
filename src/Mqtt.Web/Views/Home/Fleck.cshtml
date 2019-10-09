@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Fleck Socket Client</h1>
+</div>
+@section Scripts
+{
+	<script>
+		(function () {
+			let socket = new WebSocket("ws://localhost:9191");
+
+			socket.onopen = function(e) {
+				console.log("Open");
+			};
+
+			socket.onmessage = function(event) {
+				var now = new Date();
+				console.log(`${event.data}`);
+			};
+
+			socket.onclose = function(event) {
+			if (event.wasClean) {
+
+			} else {
+			}
+			};
+
+			socket.onerror = function(error) {
+				alert(`[error] ${error.message}`);
+			};
+		})();
+	</script>
+
+}
+
