@@ -71,18 +71,17 @@ namespace Mqtt.ConsolePublisher
                         continue;
                     }
 
-                    var payload1 = $"({DateTime.Now}):{rnd.Next(0, 50)}";
-                    var payload2 = $"{rnd.Next(0, 50)}";
+                    var payload = $"{rnd.Next(0, 50)}";
 
                     var message = new MqttApplicationMessageBuilder()
-                         .WithTopic("ali/test")
-                         .WithPayload(payload1)
+                         .WithTopic("test1")
+                         .WithPayload(payload)
                          .WithAtMostOnceQoS()
                          .WithRetainFlag()
                          .Build();
 
                     _mqttClient.PublishAsync(message);
-                    Console.WriteLine($"PUBLISHED: {payload1}");
+                    Console.WriteLine($"PUBLISHED: {payload}");
                     Thread.Sleep(sleepMiliseconds);
                 }
             });

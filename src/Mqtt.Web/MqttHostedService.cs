@@ -41,11 +41,11 @@ namespace Mqtt.Web
                 .Build();
 
             _mqttClient = new MqttFactory().CreateManagedMqttClient();
-            await _mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic("ali/test").Build());
+            await _mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic("test1").Build());
             await _mqttClient.StartAsync(options);
             _mqttClient.UseApplicationMessageReceivedHandler(e =>
             {
-                _hubContext.Clients.All.SendAsync("ReceiveMessage", $"{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
+                _hubContext.Clients.All.SendAsync("ReceiveMessage", $"({DateTime.Now}):{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
             });
 
         }

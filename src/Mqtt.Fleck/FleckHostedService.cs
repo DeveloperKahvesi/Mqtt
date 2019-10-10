@@ -46,11 +46,11 @@ namespace Mqtt.Fleck
                 .Build();
 
             _mqttClient = new MqttFactory().CreateManagedMqttClient();
-            await _mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic("ali/test").Build());
+            await _mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic("test1").Build());
             await _mqttClient.StartAsync(options);
             _mqttClient.UseApplicationMessageReceivedHandler(e =>
             {
-                _allSockets.ForEach(s => s.Send($"{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}"));
+                _allSockets.ForEach(s => s.Send($"({DateTime.Now}):{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}"));
             });
         }
 

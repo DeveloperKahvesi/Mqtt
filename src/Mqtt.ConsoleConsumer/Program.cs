@@ -25,11 +25,11 @@ namespace Mqtt.ConsoleConsumer
                 .Build();
 
             _mqttClient = new MqttFactory().CreateManagedMqttClient();
-            await _mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic("ali/test").Build());
+            await _mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic("test1").Build());
             await _mqttClient.StartAsync(options);
             _mqttClient.UseApplicationMessageReceivedHandler(e =>
             {
-                Console.WriteLine($"{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
+                Console.WriteLine($"({DateTime.Now}):{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}");
             });
 
             Console.WriteLine("-- MQTT Consumer started ---");
