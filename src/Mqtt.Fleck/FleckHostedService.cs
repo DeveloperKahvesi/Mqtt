@@ -50,7 +50,9 @@ namespace Mqtt.Fleck
             await _mqttClient.StartAsync(options);
             _mqttClient.UseApplicationMessageReceivedHandler(e =>
             {
-                _allSockets.ForEach(s => s.Send($"({DateTime.Now}):{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}"));
+                var message = $"({DateTime.Now}):{Encoding.UTF8.GetString(e.ApplicationMessage.Payload)}";
+                _allSockets.ForEach(s => s.Send(message));
+                Console.WriteLine($"FLECK SERVED : {message}");
             });
         }
 

@@ -22,6 +22,10 @@ namespace Mqtt.Web.Controllers
         {
             return View();
         }
+        public IActionResult SignalR()
+        {
+            return View();
+        }
         public IActionResult Fleck()
         {
             return View();

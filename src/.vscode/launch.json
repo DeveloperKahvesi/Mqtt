@@ -45,7 +45,6 @@
 			"preLaunchTask": "build",
 			"type": "coreclr",
 			"request": "launch",
-			"console": "externalTerminal",
 			"program": "${workspaceFolder}/Mqtt.ConsoleConsumer/bin/Debug/netcoreapp3.0/Mqtt.ConsoleConsumer.dll"
 		},
 		{
@@ -53,7 +52,6 @@
 			"preLaunchTask": "build",
 			"type": "coreclr",
 			"request": "launch",
-			"console": "externalTerminal",
 			"program": "${workspaceFolder}/Mqtt.Fleck/bin/Debug/netcoreapp3.0/Mqtt.Fleck.dll"
 		}
 	],
@@ -63,8 +61,6 @@
 			"configurations": [
 				"Producer",
 				"Web",
-				"Consumer",
-				"Fleck"
 			]
 		}
 	]
