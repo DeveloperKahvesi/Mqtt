@@ -17,7 +17,7 @@ namespace Mqtt.ConsolePublisher
                 .WithAutoReconnectDelay(TimeSpan.FromSeconds(5))
                 .WithClientOptions(
                     new MqttClientOptionsBuilder()
-                    .WithClientId("AliPublisher")
+                    .WithClientId("Ali_Publisher")
                     .WithCredentials("testuser", "testpass")
                     .WithTcpServer("www.baltavista.com", 8883)
                     .WithCleanSession(true)
@@ -71,13 +71,13 @@ namespace Mqtt.ConsolePublisher
                         continue;
                     }
 
-                    var payload1 = $"{DateTime.Now} : {rnd.Next(0, 50)}";
+                    var payload1 = $"({DateTime.Now}):{rnd.Next(0, 50)}";
                     var payload2 = $"{rnd.Next(0, 50)}";
 
                     var message = new MqttApplicationMessageBuilder()
                          .WithTopic("ali/test")
                          .WithPayload(payload1)
-                         .WithExactlyOnceQoS()
+                         .WithAtMostOnceQoS()
                          .WithRetainFlag()
                          .Build();
 

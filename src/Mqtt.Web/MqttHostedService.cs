@@ -33,7 +33,7 @@ namespace Mqtt.Web
             var options = new ManagedMqttClientOptionsBuilder()
                 .WithAutoReconnectDelay(TimeSpan.FromSeconds(5))
                 .WithClientOptions(new MqttClientOptionsBuilder()
-                    .WithClientId("AliConsumer")
+                    .WithClientId("Ali_SgnlaR_Consumer")
                     .WithCredentials("testuser", "testpass")
                     .WithTcpServer("www.baltavista.com", 8883)
                     .WithCleanSession(true)
@@ -41,7 +41,7 @@ namespace Mqtt.Web
                 .Build();
 
             _mqttClient = new MqttFactory().CreateManagedMqttClient();
-            await _mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic("ali/test").WithExactlyOnceQoS().Build());
+            await _mqttClient.SubscribeAsync(new TopicFilterBuilder().WithTopic("ali/test").Build());
             await _mqttClient.StartAsync(options);
             _mqttClient.UseApplicationMessageReceivedHandler(e =>
             {

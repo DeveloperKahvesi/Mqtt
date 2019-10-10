@@ -1,37 +1,43 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Fleck Scoket Client";
 }
+
 
 <div class="text-center">
     <h1 class="display-4">Fleck Socket Client</h1>
+    <partial name="_signalTable" />
 </div>
+
 @section Scripts
 {
-	<script>
-		(function () {
-			let socket = new WebSocket("ws://localhost:9191");
+    <script>
+        (function () {
+            let socket = new WebSocket("ws://localhost:9191");
 
-			socket.onopen = function(e) {
-				console.log("Open");
-			};
+            socket.onopen = function (e) {
+                console.log("Open");
+            };
 
-			socket.onmessage = function(event) {
-				var now = new Date();
-				console.log(`${event.data}`);
-			};
+            socket.onmessage = function (event) {
+                //console.log(`${event.data}`);
+                PrependMqttMessage(event.data, "signal-table");
+            };
 
-			socket.onclose = function(event) {
-			if (event.wasClean) {
+            socket.onclose = function (event) {
+                if (event.wasClean) {
 
-			} else {
-			}
-			};
+                } else {
+                }
+            };
 
-			socket.onerror = function(error) {
-				alert(`[error] ${error.message}`);
-			};
-		})();
-	</script>
+            socket.onerror = function (error) {
+                console.error(`${error.message}`);
+            };
+        })();
+
+
+
+    </script>
 
 }
 
