@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flask Example</title>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script>
+        app = angular.module('app',[]).config(function($interpolateProvider) {
+            $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+        });
+
+        app.filter('reverse',function(){
+            return function(items){
+                return items.slice().reverse();
+            }
+        });
+        
+        app.controller("MQTTController",function($scope,$http) {
+            
+            var socket = io();
+            $scope.messages = [];
+
+            $http.get('/getData').then(function(response){
+                var msgs = response.data.series[0].values;
+                for (let index = 0; index < msgs.length; index++) {
+                    $scope.messages.push({"time": msgs[index][0], "value":msgs[index][1]});                    
+                }
+
+                socket.on('mqtt_message',function(msg){
+                 
+                    $scope.messages.push({"time":Date.now(),"value":msg});
+                    
+                    $scope.$apply();
+                })
+            });
+
+        });
+    </script>
+
+</head>
+<body ng-app='app'>
+  <div class="container" ng-controller="MQTTController" ng-cloak>
+    <div class="row" ng-repeat="msg in messages | reverse">
+        <div class="col-4">
+            {[{msg.time | date : 'dd/MM/yyyy h:mm:ss'}]}
+        </div>
+        <div class="col-4">
+            {[{msg.value}]}
+        </div>
+    </div>
+
+  </div>
+</body>
+</html>
