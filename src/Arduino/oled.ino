@@ -44,7 +44,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
 void setup() {
     oled.begin(SSD1306_SWITCHCAPVCC, OLED_Address);
 
-    WiFi.begin("OEU", "434Az8b*23");
+    WiFi.begin("xxx", "xxx");
 
     AddLcdLine("Connecting to WiFi");
     while (WiFi.status() != WL_CONNECTED) {
